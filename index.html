@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buscador de Planos de Aula - Windows 95</title>
+  <link rel="stylesheet" href="style95.css">
+</head>
+<body>
+  <!-- Ícones da área de trabalho no canto esquerdo, alinhados, sem legenda visível -->
+  <div class="desktop-icons left-corner">
+    <button type="button" class="icon desktop-shortcut" id="icon-planos" aria-label="Abrir Buscador de Planos de Aula" title="Planos de Aula" style="position: absolute; top: 40px; left: 40px;" tabindex="0">
+      <img src="book-question.png" alt="Planos de Aula" />
+    </button>
+    <button type="button" class="icon desktop-shortcut" id="icon-recursos" aria-label="Abrir Recursos" title="Recursos" style="position: absolute; top: 120px; left: 40px;" tabindex="0">
+      <img src="https://img.icons8.com/fluency/48/000000/folder-invoices.png" alt="Recursos" />
+    </button>
+    <button type="button" class="icon desktop-shortcut" id="icon-metodologias" aria-label="Abrir Registro de Metodologias Ativas" title="Jogo: Metodologias Ativas" style="position: absolute; top: 200px; left: 40px;" tabindex="0">
+      <img src="https://img.icons8.com/fluency/48/000000/save-close.png" alt="Disquete - Metodologias Ativas" />
+    </button>
+    <a href="#" class="icon desktop-shortcut" id="icon-email" aria-label="Enviar atividades por e-mail" title="Enviar atividades por e-mail" style="position: absolute; top: 280px; left: 40px;" tabindex="0">
+      <img src="https://img.icons8.com/fluency/48/000000/new-post.png" alt="Enviar por e-mail" />
+    </a>
+    <button type="button" class="icon desktop-shortcut" id="icon-notepad" aria-label="Bloco de Notas" title="Bloco de Notas" style="position: absolute; top: 360px; left: 40px;" tabindex="0">
+      <img src="https://img.icons8.com/fluency/48/000000/notepad.png" alt="Bloco de Notas" />
+    </button>
+    <button type="button" class="icon desktop-shortcut" id="icon-navegador" aria-label="Navegador de Ferramentas Digitais" title="Navegador de Ferramentas Digitais" style="position: absolute; top: 440px; left: 40px;" tabindex="0">
+      <img src="https://img.icons8.com/color/48/000000/globe--v2.png" alt="Navegador" />
+    </button>
+    <button type="button" class="icon desktop-shortcut" id="icon-jogo" aria-label="Abrir Jogo Prof Ronaldo" title="Jogo Prof Ronaldo" style="position: absolute; top: 520px; left: 40px;" tabindex="0">
+      <img src="https://img.icons8.com/color/48/000000/controller.png" alt="Jogo Prof Ronaldo" />
+    </button>
+    <!-- Adicione mais atalhos aqui conforme desejar, seguindo o padrão acima -->
+  </div>
+
+  <!-- Janela principal estilo Win95 -->
+  <div class="window movable" id="main-window" style="margin-top: 80px; left: 100px; top: 100px; position: absolute; display: none;">
+    <div class="title-bar" id="title-bar">
+      <div class="title-bar-text">
+        <img src="retro-computer.avif" alt="" style="width:18px;height:18px;vertical-align:middle;"> Buscador de Planos de Aula
+      </div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimizar" id="minimize-btn">_</button>
+        <button aria-label="Maximizar">□</button>
+        <button aria-label="Fechar" id="close-btn">×</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="window-body-inner">
+        <!-- Conteúdo do buscador aqui -->
+        <h1>Buscador de Planos de Aula</h1>
+        <label for="space-select">Espaço disponível:</label>
+        <select id="space-select">
+          <option value="">-- Escolha um espaço --</option>
+          <option>Sala de aula</option>
+          <option>Laboratório de informática</option>
+          <option>Laboratório maker</option>
+          <option>Biblioteca</option>
+          <option>Pátio</option>
+        </select>
+        <label for="theme-select">Temática curricular:</label>
+        <select id="theme-select">
+          <option value="">-- Escolha uma temática --</option>
+          <option>Matemática</option>
+          <option>Ciências</option>
+          <option>História</option>
+          <option>Geografia</option>
+          <option>Artes</option>
+          <option>Tecnologia</option>
+        </select>
+        <label>Recursos disponíveis:</label>
+        <div class="checkbox-group" id="resource-checkboxes"></div>
+        <h2>Planos sugeridos:</h2>
+        <div id="results"><p>Aguardando seleção...</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Janela do jogo de registro de metodologias ativas (inicialmente oculta) -->
+  <div class="window movable" id="metodologias-window" style="margin-top: 120px; left: 160px; top: 120px; position: absolute; display: none; max-width: 600px; min-width: 340px;">
+    <div class="title-bar" id="metodologias-title-bar">
+      <div class="title-bar-text">
+        <img src="https://img.icons8.com/fluency/24/000000/save-close.png" alt="Disquete" style="width:18px;height:18px;vertical-align:middle;"> Registro de Metodologias Ativas
+      </div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimizar" id="metodologias-minimize-btn">_</button>
+        <button aria-label="Fechar" id="metodologias-close-btn">×</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="window-body-inner">
+        <h1>Jogo: Metodologias Ativas & Recursos Tecnológicos</h1>
+        <form id="metodologias-form">
+          <label for="metodologias-select">Quais metodologias ativas você já aplicou?</label>
+          <select id="metodologias-select" multiple size="6" style="width:100%;margin-bottom:10px;">
+            <option>Aprendizagem Baseada em Projetos (ABP)</option>
+            <option>Gamificação</option>
+            <option>Sala de Aula Invertida</option>
+            <option>Estudo de Caso</option>
+            <option>Aprendizagem por Pares</option>
+            <option>Rotação por Estações</option>
+            <option>Design Thinking</option>
+            <option>Aprendizagem Baseada em Problemas</option>
+            <option>Ensino Híbrido</option>
+            <option>Mapas Mentais</option>
+            <option>Oficinas Maker</option>
+            <option>Debates e Simulações</option>
+            <option>Aprendizagem Colaborativa</option>
+            <option>Portfólios Digitais</option>
+            <option>Outros</option>
+          </select>
+          <label for="recursos-select">Quais recursos tecnológicos você já usou em sala?</label>
+          <select id="recursos-select" multiple size="7" style="width:100%;margin-bottom:10px;">
+            <option>Lousa digital</option>
+            <option>Projetor multimídia</option>
+            <option>Computadores</option>
+            <option>Tablets</option>
+            <option>Internet/Redes Sociais</option>
+            <option>Arduino</option>
+            <option>Robótica</option>
+            <option>Impressora 3D</option>
+            <option>Realidade Virtual/Aumentada</option>
+            <option>Apps Educacionais</option>
+            <option>Plataformas de Ensino Online</option>
+            <option>Simuladores Digitais</option>
+            <option>Jogos Digitais</option>
+            <option>Ambientes de Programação</option>
+            <option>Outros</option>
+          </select>
+          <label for="avatar-upload">Envie a imagem do seu personagem:</label>
+          <input type="file" id="avatar-upload" accept="image/*" style="margin-bottom:10px;">
+          <div id="avatar-preview" style="margin-bottom:10px;"></div>
+          <button type="submit" class="lablink-btn" style="margin-top:8px;">Registrar e Ganhar Pontos!</button>
+        </form>
+        <div id="metodologias-feedback" style="margin-top:16px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Janela de envio de atividades por e-mail (inicialmente oculta) -->
+  <div class="window movable" id="email-window" style="margin-top: 160px; left: 220px; top: 160px; position: absolute; display: none; max-width: 600px; min-width: 340px;">
+    <div class="title-bar" id="email-title-bar">
+      <div class="title-bar-text">
+        <img src="https://img.icons8.com/fluency/24/000000/new-post.png" alt="Carta" style="width:18px;height:18px;vertical-align:middle;"> Compartilhe suas atividades
+      </div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimizar" id="email-minimize-btn">_</button>
+        <button aria-label="Fechar" id="email-close-btn">×</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="window-body-inner">
+        <h1>Envie suas práticas didáticas!</h1>
+        <p style="margin-bottom:12px;">Mande imagens de suas atividades para <a href="mailto:seuemail@exemplo.com" style="color:#000080;font-weight:bold;">ronaldonfontana@prof.educacao.sp.gov.br</a><br></p>
+        <div id="carousel-container" class="carousel-container">
+          <button id="carousel-prev" class="carousel-btn" aria-label="Anterior">&#9664;</button>
+          <div id="carousel-slides" class="carousel-slides"></div>
+          <button id="carousel-next" class="carousel-btn" aria-label="Próxima">&#9654;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Janela do bloco de notas Win95 (inicialmente oculta) -->
+  <div class="window movable" id="notepad-window" style="margin-top: 200px; left: 260px; top: 200px; position: absolute; display: none; max-width: 400px; min-width: 260px;">
+    <div class="title-bar" id="notepad-title-bar">
+      <div class="title-bar-text">
+        <img src="https://img.icons8.com/fluency/24/000000/notepad.png" alt="Bloco de Notas" style="width:18px;height:18px;vertical-align:middle;"> Bloco de Notas
+      </div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimizar" id="notepad-minimize-btn">_</button>
+        <button aria-label="Fechar" id="notepad-close-btn">×</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="window-body-inner">
+        <textarea id="notepad-textarea" style="width:100%;height:120px;resize:vertical;font-family:'MS Sans Serif',Arial,sans-serif;font-size:15px;padding:8px;border:2px inset #b0c4de;background:#fff;">Compartilhe nossa Página</textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Janela do navegador Win95 (inicialmente oculta) -->
+  <div class="window movable" id="navegador-window" style="margin-top: 240px; left: 320px; top: 240px; position: absolute; display: none; max-width: 540px; min-width: 320px;">
+    <div class="title-bar" id="navegador-title-bar">
+      <div class="title-bar-text">
+        <img src="https://img.icons8.com/color/24/000000/globe--v2.png" alt="Globo" style="width:18px;height:18px;vertical-align:middle;"> Navegador de Ferramentas Digitais
+      </div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimizar" id="navegador-minimize-btn">_</button>
+        <button aria-label="Fechar" id="navegador-close-btn">×</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="window-body-inner" style="padding: 10px 0 0 0;">
+        <div style="max-height: 420px; overflow-y: auto;">
+          <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 18px;">
+            <!-- Painel de ícones clicáveis -->
+            <div style="background: #eaf2fb; border: 2px solid #b0c4de; border-radius: 12px; padding: 18px 18px 10px 18px; box-shadow: 1px 2px 8px #0002; min-width: 260px; max-width: 420px; margin: 0 auto;">
+              <h3 style="color:#000080; text-align:center; margin-bottom: 10px;">🎓 Gerais para Organização e Planejamento</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                <a href="https://classroom.google.com/" target="_blank" title="Google Sala de Aula"><img src="https://img.icons8.com/color/48/000000/google-classroom.png" alt="Google Sala de Aula"/></a>
+                <a href="https://www.microsoft.com/pt-br/education/products/teams" target="_blank" title="Microsoft Teams"><img src="https://img.icons8.com/color/48/000000/microsoft-teams.png" alt="Teams"/></a>
+                <a href="https://trello.com/" target="_blank" title="Trello"><img src="https://img.icons8.com/color/48/000000/trello.png" alt="Trello"/></a>
+                <a href="https://www.notion.so/" target="_blank" title="Notion"><img src="https://img.icons8.com/color/48/000000/notion.png" alt="Notion"/></a>
+                <a href="https://padlet.com/" target="_blank" title="Padlet"><img src="https://img.icons8.com/color/48/000000/padlet.png" alt="Padlet"/></a>
+              </div>
+              <h3 style="color:#000080; text-align:center; margin:18px 0 10px 0;">🧑‍🏫 Criação de Conteúdo Didático</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                <a href="https://www.canva.com/" target="_blank" title="Canva"><img src="https://img.icons8.com/color/48/000000/canva.png" alt="Canva"/></a>
+                <a href="https://www.genial.ly/" target="_blank" title="Genially"><img src="https://img.icons8.com/color/48/000000/genially.png" alt="Genially"/></a>
+                <a href="https://prezi.com/" target="_blank" title="Prezi"><img src="https://img.icons8.com/color/48/000000/prezi.png" alt="Prezi"/></a>
+                <a href="https://bookcreator.com/" target="_blank" title="Book Creator"><img src="https://img.icons8.com/color/48/000000/book.png" alt="Book Creator"/></a>
+              </div>
+              <h3 style="color:#000080; text-align:center; margin:18px 0 10px 0;">🎥 Aulas em Vídeo e Transmissão</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                <a href="https://www.loom.com/" target="_blank" title="Loom"><img src="https://img.icons8.com/color/48/000000/loom.png" alt="Loom"/></a>
+                <a href="https://obsproject.com/" target="_blank" title="OBS Studio"><img src="https://img.icons8.com/color/48/000000/obs-studio.png" alt="OBS Studio"/></a>
+                <a href="https://www.youtube.com/" target="_blank" title="YouTube"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube"/></a>
+                <a href="https://edpuzzle.com/" target="_blank" title="Edpuzzle"><img src="https://img.icons8.com/color/48/000000/puzzle.png" alt="Edpuzzle"/></a>
+              </div>
+              <h3 style="color:#000080; text-align:center; margin:18px 0 10px 0;">🧠 Aprendizagem Ativa e Avaliação Formativa</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                <a href="https://kahoot.com/" target="_blank" title="Kahoot!"><img src="https://img.icons8.com/color/48/000000/kahoot.png" alt="Kahoot!"/></a>
+                <a href="https://quizizz.com/" target="_blank" title="Quizizz"><img src="https://img.icons8.com/color/48/000000/quizizz.png" alt="Quizizz"/></a>
+                <a href="https://www.socrative.com/" target="_blank" title="Socrative"><img src="https://img.icons8.com/color/48/000000/socrative.png" alt="Socrative"/></a>
+                <a href="https://www.mentimeter.com/" target="_blank" title="Mentimeter"><img src="https://img.icons8.com/color/48/000000/mentimeter.png" alt="Mentimeter"/></a>
+                <a href="https://get.plickers.com/" target="_blank" title="Plickers"><img src="https://img.icons8.com/color/48/000000/plickers.png" alt="Plickers"/></a>
+              </div>
+              <h3 style="color:#000080; text-align:center; margin:18px 0 10px 0;">🧪 Ciências, Matemática e Programação</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                <a href="https://phet.colorado.edu/" target="_blank" title="PhET Simulações"><img src="https://img.icons8.com/color/48/000000/physics.png" alt="PhET"/></a>
+                <a href="https://www.geogebra.org/" target="_blank" title="GeoGebra"><img src="https://img.icons8.com/color/48/000000/geogebra.png" alt="GeoGebra"/></a>
+                <a href="https://www.desmos.com/" target="_blank" title="Desmos"><img src="https://img.icons8.com/color/48/000000/desmos.png" alt="Desmos"/></a>
+                <a href="https://scratch.mit.edu/" target="_blank" title="Scratch"><img src="https://img.icons8.com/color/48/000000/scratch.png" alt="Scratch"/></a>
+                <a href="https://www.tinkercad.com/" target="_blank" title="Tinkercad"><img src="https://img.icons8.com/color/48/000000/tinkercad.png" alt="Tinkercad"/></a>
+              </div>
+              <h3 style="color:#000080; text-align:center; margin:18px 0 10px 0;">📚 Leitura, Escrita e Idiomas</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                <a href="https://storybird.com/" target="_blank" title="Storybird"><img src="https://img.icons8.com/color/48/000000/storybird.png" alt="Storybird"/></a>
+                <a href="https://flip.com/" target="_blank" title="Flip (Flipgrid)"><img src="https://img.icons8.com/color/48/000000/flipgrid.png" alt="Flipgrid"/></a>
+                <a href="https://www.kialo-edu.com/" target="_blank" title="Kialo Edu"><img src="https://img.icons8.com/color/48/000000/kialo.png" alt="Kialo Edu"/></a>
+                <a href="https://lyricstraining.com/" target="_blank" title="LyricsTraining"><img src="https://img.icons8.com/color/48/000000/lyrics.png" alt="LyricsTraining"/></a>
+                <a href="https://rewordify.com/" target="_blank" title="Rewordify"><img src="https://img.icons8.com/color/48/000000/rewordify.png" alt="Rewordify"/></a>
+              </div>
+              <h3 style="color:#000080; text-align:center; margin:18px 0 10px 0;">📊 Análise e Feedback</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                <a href="https://docs.google.com/forms/" target="_blank" title="Google Forms"><img src="https://img.icons8.com/color/48/000000/google-forms.png" alt="Google Forms"/></a>
+                <a href="https://forms.office.com/" target="_blank" title="Microsoft Forms"><img src="https://img.icons8.com/color/48/000000/microsoft-forms.png" alt="Microsoft Forms"/></a>
+                <a href="https://www.formative.com/" target="_blank" title="Formative"><img src="https://img.icons8.com/color/48/000000/formative.png" alt="Formative"/></a>
+                <a href="https://www.classdojo.com/" target="_blank" title="ClassDojo"><img src="https://img.icons8.com/color/48/000000/classdojo.png" alt="ClassDojo"/></a>
+                <a href="https://miro.com/" target="_blank" title="Miro"><img src="https://img.icons8.com/color/48/000000/miro.png" alt="Miro"/></a>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:center; margin-top: 18px;">
+            <span style="font-size: 1.1em; color: #000;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Janela de Recursos (antiga Atividades de Ciências, renomeada) -->
+  <div class="window movable" id="recursos-window" style="margin-top: 160px; left: 120px; top: 120px; position: absolute; display: none; max-width: 520px; min-width: 320px;">
+    <div class="title-bar" id="recursos-title-bar">
+      <div class="title-bar-text">
+        <img src="https://img.icons8.com/fluency/24/000000/folder-invoices.png" alt="Pasta" style="width:18px;height:18px;vertical-align:middle;"> Recursos
+      </div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimizar" id="recursos-minimize-btn">_</button>
+        <button aria-label="Fechar" id="recursos-close-btn">×</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="window-body-inner" style="padding: 10px 0 0 0;">
+        <div style="display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin-bottom: 18px;">
+          <!-- Pasta do Google Drive -->
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <a href="https://drive.google.com/drive/folders/1QJw6uosW68mvQrcIEhJy-WIwgZdC-rHI?usp=sharing" target="_blank" style="text-decoration:none;">
+              <img src="https://img.icons8.com/fluency/48/000000/google-drive--v2.png" alt="Google Drive"/>
+              <div style="color:#006400;font-weight:bold;font-size:13px;margin-top:2px;">Atividades no Drive</div>
+            </a>
+          </div>
+          <!-- Pasta Taxonomia de Bloom -->
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <button id="open-bloom-btn" aria-label="Abrir Taxonomia de Bloom" title="Taxonomia de Bloom" style="background:none;border:none;cursor:pointer;outline:none;">
+              <img src="https://img.icons8.com/fluency/48/000000/folder-invoices.png" alt="Taxonomia de Bloom"/>
+              <div style="color:#003366;font-size:13px;margin-top:2px;font-weight:bold;">Taxonomia de Bloom</div>
+            </button>
+          </div>
+          <!-- Pastas ilustrativas -->
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="https://img.icons8.com/fluency/48/000000/folder-invoices.png" alt="Pasta Fictícia"/>
+            <div style="color:#003366;font-size:13px;margin-top:2px;">Experimentos</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="https://img.icons8.com/fluency/48/000000/folder-invoices.png" alt="Pasta Fictícia"/>
+            <div style="color:#003366;font-size:13px;margin-top:2px;">Projetos Maker</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="https://img.icons8.com/fluency/48/000000/folder-invoices.png" alt="Pasta Fictícia"/>
+            <div style="color:#003366;font-size:13px;margin-top:2px;">Jogos Educativos</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="https://img.icons8.com/fluency/48/000000/folder-invoices.png" alt="Pasta Fictícia"/>
+            <div style="color:#003366;font-size:13px;margin-top:2px;">Outros Recursos</div>
+          </div>
+        </div>
+        <div style="text-align:center; margin-top: 8px;">
+          <span style="font-size: 1.1em; color: #006400; font-weight:bold;">Clique na pasta do Google Drive para acessar as atividades reais.<br>As demais são ilustrativas.<br>Explore também a Taxonomia de Bloom!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Janela Taxonomia de Bloom (inicialmente oculta) -->
+  <div class="window movable" id="bloom-window" style="margin-top: 200px; left: 180px; top: 180px; position: absolute; display: none; max-width: 680px; min-width: 340px;">
+    <div class="title-bar" id="bloom-title-bar">
+      <div class="title-bar-text">
+        <img src="https://img.icons8.com/fluency/24/000000/folder-invoices.png" alt="Pasta" style="width:18px;height:18px;vertical-align:middle;"> Taxonomia de Bloom
+      </div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimizar" id="bloom-minimize-btn">_</button>
+        <button aria-label="Fechar" id="bloom-close-btn">×</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="window-body-inner" id="bloom-content" style="padding: 10px 0 0 0; max-height: 420px; overflow-y: auto;">
+        <!-- Conteúdo dinâmico da taxonomia será inserido via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Janela do Jogo Prof Ronaldo (inicialmente oculta) -->
+  <div class="window movable" id="jogo-window" style="margin-top: 180px; left: 320px; top: 180px; position: absolute; display: none; max-width: 800px; min-width: 340px;">
+    <div class="title-bar" id="jogo-title-bar">
+      <div class="title-bar-text">
+        <img src="https://img.icons8.com/color/24/000000/controller.png" alt="Controle" style="width:18px;height:18px;vertical-align:middle;"> Jogo Prof Ronaldo
+      </div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimizar" id="jogo-minimize-btn">_</button>
+        <button aria-label="Fechar" id="jogo-close-btn">×</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="window-body-inner" style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <h2 style="color:#003366;">Space Invaders - Prof Ronaldo</h2>
+        <div style="margin-bottom:8px;">
+          <label for="jogo-avatar-upload" style="font-size:14px;">Envie seu avatar para aparecer no jogo:</label>
+          <input type="file" id="jogo-avatar-upload" accept="image/*" style="margin-left:8px;">
+          <span id="jogo-avatar-preview" style="margin-left:12px;"></span>
+        </div>
+        <iframe id="jogo-iframe" src="Jogo%20prof%20ronaldo/index.html" title="Jogo Prof Ronaldo" style="width: 700px; height: 540px; border: 2px inset #b0c4de; background: #000; border-radius: 8px;" allowfullscreen loading="lazy"></iframe>
+        <div style="font-size:13px;color:#003366;margin-top:6px;">Atire Livros enquanto eles atiram celulares</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Painel de contatos rápidos (telefone) -->
+  <div id="phone-panel" style="display:none; position:fixed; bottom:38px; right:70px; z-index:3001; background:#eaf2fb; border:2px solid #b0c4de; border-radius:12px; box-shadow:0 2px 12px #0003; min-width:220px; max-width:320px; padding:16px 18px 12px 18px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+      <span style="font-weight:bold; color:#003366; font-size:1.1em;">Contatos Rápidos</span>
+      <button id="phone-panel-close" aria-label="Fechar" style="background:none; border:none; font-size:1.2em; cursor:pointer; color:#003366;">×</button>
+    </div>
+    <div style="margin-bottom:10px;">
+      <a href="https://chat.whatsapp.com/EE3fsztGdByA9flBGgwSmf" target="_blank" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:#075e54;font-weight:bold;">
+        <img src="https://img.icons8.com/color/32/000000/whatsapp--v1.png" alt="WhatsApp" style="width:28px;height:28px;"> Grupo WhatsApp</a>
+    </div>
+    <div>
+      <a href="https://ig.me/j/AbYKGocd0fOCO86y/" target="_blank" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:#c13584;font-weight:bold;">
+        <img src="https://img.icons8.com/color/32/000000/instagram-new--v2.png" alt="Instagram" style="width:28px;height:28px;"> Canal de Recursos Didáticos</a>
+    </div>
+  </div>
+
+  <!-- Barra de tarefas estilo Win95 -->
+  <div class="taskbar">
+    <button class="start-button"> <img src="retro-computer.avif" alt="Computador Retro" style="width:18px;height:18px;"> Iniciar</button>
+    <button class="lablink-taskbar-btn" onclick="window.open('https://discord.gg/RXkqqmT2','_blank')" title="Entrar no LabLink no Discord">
+      <span style="font-size: 1.1em;">🔬💬</span> LabLink
+    </button>
+    <div class="clock" id="clock"></div>
+    <button id="ghost-toggle" class="ghost-toggle-btn" title="tenho medo de tecnologia" aria-pressed="false" style="margin-left: 0; margin-right: 12px; background: transparent; border: none; cursor: pointer; outline: none;">
+      <span style="font-size: 1.3em;">👻</span>
+    </button>
+    <button id="phone-toggle" class="phone-toggle-btn" title="Contatos rápidos" aria-pressed="false" style="margin-left: 0; margin-right: 8px; background: transparent; border: none; cursor: pointer; outline: none;">
+      <span style="font-size: 1.3em;">📞</span>
+    </button>
+  </div>
+  <img src="Tales_de_Mileto-removebg-preview.png" alt="Tales de Mileto" class="bg-watermark" />
+  <script src="script95.js"></script>
+</body>
+</html>
