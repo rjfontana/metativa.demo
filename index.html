@@ -3,41 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Buscador de Planos de Aula - Windows 95</title>
+  <title>AEX astronomia - Windows 95</title>
   <link rel="stylesheet" href="style95.css">
 </head>
 <body>
-  <!-- Ícones da área de trabalho no canto esquerdo, alinhados, sem legenda visível -->
-  <div class="desktop-icons left-corner">
-    <button type="button" class="icon desktop-shortcut" id="icon-planos" aria-label="Abrir Buscador de Planos de Aula" title="Planos de Aula" style="position: absolute; top: 40px; left: 40px;" tabindex="0">
-      <img src="book-question.png" alt="Planos de Aula" />
-    </button>
-    <button type="button" class="icon desktop-shortcut" id="icon-recursos" aria-label="Abrir Recursos" title="Recursos" style="position: absolute; top: 120px; left: 40px;" tabindex="0">
-      <img src="https://img.icons8.com/fluency/48/000000/folder-invoices.png" alt="Recursos" />
-    </button>
-    <button type="button" class="icon desktop-shortcut" id="icon-metodologias" aria-label="Abrir Registro de Metodologias Ativas" title="Jogo: Metodologias Ativas" style="position: absolute; top: 200px; left: 40px;" tabindex="0">
-      <img src="https://img.icons8.com/fluency/48/000000/save-close.png" alt="Disquete - Metodologias Ativas" />
-    </button>
-    <a href="#" class="icon desktop-shortcut" id="icon-email" aria-label="Enviar atividades por e-mail" title="Enviar atividades por e-mail" style="position: absolute; top: 280px; left: 40px;" tabindex="0">
-      <img src="https://img.icons8.com/fluency/48/000000/new-post.png" alt="Enviar por e-mail" />
-    </a>
-    <button type="button" class="icon desktop-shortcut" id="icon-notepad" aria-label="Bloco de Notas" title="Bloco de Notas" style="position: absolute; top: 360px; left: 40px;" tabindex="0">
-      <img src="https://img.icons8.com/fluency/48/000000/notepad.png" alt="Bloco de Notas" />
-    </button>
-    <button type="button" class="icon desktop-shortcut" id="icon-navegador" aria-label="Navegador de Ferramentas Digitais" title="Navegador de Ferramentas Digitais" style="position: absolute; top: 440px; left: 40px;" tabindex="0">
-      <img src="https://img.icons8.com/color/48/000000/globe--v2.png" alt="Navegador" />
-    </button>
-    <button type="button" class="icon desktop-shortcut" id="icon-jogo" aria-label="Abrir Jogo Prof Ronaldo" title="Jogo Prof Ronaldo" style="position: absolute; top: 520px; left: 40px;" tabindex="0">
-      <img src="https://img.icons8.com/color/48/000000/controller.png" alt="Jogo Prof Ronaldo" />
-    </button>
-    <!-- Adicione mais atalhos aqui conforme desejar, seguindo o padrão acima -->
-  </div>
-
   <!-- Janela principal estilo Win95 -->
   <div class="window movable" id="main-window" style="margin-top: 80px; left: 100px; top: 100px; position: absolute; display: none;">
     <div class="title-bar" id="title-bar">
       <div class="title-bar-text">
-        <img src="retro-computer.avif" alt="" style="width:18px;height:18px;vertical-align:middle;"> Buscador de Planos de Aula
+        <img src="retro-computer.avif" alt="" style="width:18px;height:18px;vertical-align:middle;"> AEX astronomia
       </div>
       <div class="title-bar-controls">
         <button aria-label="Minimizar" id="minimize-btn">_</button>
@@ -48,7 +22,7 @@
     <div class="window-body">
       <div class="window-body-inner">
         <!-- Conteúdo do buscador aqui -->
-        <h1>Buscador de Planos de Aula</h1>
+        <h1>AEX astronomia</h1>
         <label for="space-select">Espaço disponível:</label>
         <select id="space-select">
           <option value="">-- Escolha um espaço --</option>
@@ -72,67 +46,6 @@
         <div class="checkbox-group" id="resource-checkboxes"></div>
         <h2>Planos sugeridos:</h2>
         <div id="results"><p>Aguardando seleção...</p></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Janela do jogo de registro de metodologias ativas (inicialmente oculta) -->
-  <div class="window movable" id="metodologias-window" style="margin-top: 120px; left: 160px; top: 120px; position: absolute; display: none; max-width: 600px; min-width: 340px;">
-    <div class="title-bar" id="metodologias-title-bar">
-      <div class="title-bar-text">
-        <img src="https://img.icons8.com/fluency/24/000000/save-close.png" alt="Disquete" style="width:18px;height:18px;vertical-align:middle;"> Registro de Metodologias Ativas
-      </div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimizar" id="metodologias-minimize-btn">_</button>
-        <button aria-label="Fechar" id="metodologias-close-btn">×</button>
-      </div>
-    </div>
-    <div class="window-body">
-      <div class="window-body-inner">
-        <h1>Jogo: Metodologias Ativas & Recursos Tecnológicos</h1>
-        <form id="metodologias-form">
-          <label for="metodologias-select">Quais metodologias ativas você já aplicou?</label>
-          <select id="metodologias-select" multiple size="6" style="width:100%;margin-bottom:10px;">
-            <option>Aprendizagem Baseada em Projetos (ABP)</option>
-            <option>Gamificação</option>
-            <option>Sala de Aula Invertida</option>
-            <option>Estudo de Caso</option>
-            <option>Aprendizagem por Pares</option>
-            <option>Rotação por Estações</option>
-            <option>Design Thinking</option>
-            <option>Aprendizagem Baseada em Problemas</option>
-            <option>Ensino Híbrido</option>
-            <option>Mapas Mentais</option>
-            <option>Oficinas Maker</option>
-            <option>Debates e Simulações</option>
-            <option>Aprendizagem Colaborativa</option>
-            <option>Portfólios Digitais</option>
-            <option>Outros</option>
-          </select>
-          <label for="recursos-select">Quais recursos tecnológicos você já usou em sala?</label>
-          <select id="recursos-select" multiple size="7" style="width:100%;margin-bottom:10px;">
-            <option>Lousa digital</option>
-            <option>Projetor multimídia</option>
-            <option>Computadores</option>
-            <option>Tablets</option>
-            <option>Internet/Redes Sociais</option>
-            <option>Arduino</option>
-            <option>Robótica</option>
-            <option>Impressora 3D</option>
-            <option>Realidade Virtual/Aumentada</option>
-            <option>Apps Educacionais</option>
-            <option>Plataformas de Ensino Online</option>
-            <option>Simuladores Digitais</option>
-            <option>Jogos Digitais</option>
-            <option>Ambientes de Programação</option>
-            <option>Outros</option>
-          </select>
-          <label for="avatar-upload">Envie a imagem do seu personagem:</label>
-          <input type="file" id="avatar-upload" accept="image/*" style="margin-bottom:10px;">
-          <div id="avatar-preview" style="margin-bottom:10px;"></div>
-          <button type="submit" class="lablink-btn" style="margin-top:8px;">Registrar e Ganhar Pontos!</button>
-        </form>
-        <div id="metodologias-feedback" style="margin-top:16px;"></div>
       </div>
     </div>
   </div>
@@ -260,7 +173,7 @@
     </div>
   </div>
 
-  <!-- Janela de Recursos (antiga Atividades de Ciências, renomeada) -->
+  <!-- Janela de Recursos -->
   <div class="window movable" id="recursos-window" style="margin-top: 160px; left: 120px; top: 120px; position: absolute; display: none; max-width: 520px; min-width: 320px;">
     <div class="title-bar" id="recursos-title-bar">
       <div class="title-bar-text">
@@ -356,37 +269,174 @@
     </div>
   </div>
 
-  <!-- Painel de contatos rápidos (telefone) -->
-  <div id="phone-panel" style="display:none; position:fixed; bottom:38px; right:70px; z-index:3001; background:#eaf2fb; border:2px solid #b0c4de; border-radius:12px; box-shadow:0 2px 12px #0003; min-width:220px; max-width:320px; padding:16px 18px 12px 18px;">
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
-      <span style="font-weight:bold; color:#003366; font-size:1.1em;">Contatos Rápidos</span>
-      <button id="phone-panel-close" aria-label="Fechar" style="background:none; border:none; font-size:1.2em; cursor:pointer; color:#003366;">×</button>
-    </div>
-    <div style="margin-bottom:10px;">
-      <a href="https://chat.whatsapp.com/EE3fsztGdByA9flBGgwSmf" target="_blank" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:#075e54;font-weight:bold;">
-        <img src="https://img.icons8.com/color/32/000000/whatsapp--v1.png" alt="WhatsApp" style="width:28px;height:28px;"> Grupo WhatsApp</a>
-    </div>
-    <div>
-      <a href="https://ig.me/j/AbYKGocd0fOCO86y/" target="_blank" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:#c13584;font-weight:bold;">
-        <img src="https://img.icons8.com/color/32/000000/instagram-new--v2.png" alt="Instagram" style="width:28px;height:28px;"> Canal de Recursos Didáticos</a>
+  <!-- Ícone de pasta Observações na área de trabalho virtual -->
+  <div class="desktop-icons left-corner" style="position:fixed;top:120px;left:40px;z-index:100;">
+    <div class="icon desktop-shortcut" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;" id="icon-observacoes" tabindex="0" title="Observações">
+      <img src="https://img.icons8.com/fluency/48/000000/folder-invoices.png" alt="Pasta Observações" style="width:48px;height:48px;">
+      <span style="font-size:13px;color:#003366;margin-top:2px;">Observações</span>
     </div>
   </div>
 
+  <script>
+  // Ao clicar no ícone Observações, abre o link do Google Drive em nova aba
+  document.getElementById('icon-observacoes').onclick = function() {
+    window.open('https://drive.google.com/drive/folders/1Ez3YvUGNkTIeaO_KZ8BP_OmBjuZDdG9p?usp=sharing', '_blank');
+  };
+  </script>
+
   <!-- Barra de tarefas estilo Win95 -->
   <div class="taskbar">
-    <button class="start-button"> <img src="retro-computer.avif" alt="Computador Retro" style="width:18px;height:18px;"> Iniciar</button>
-    <button class="lablink-taskbar-btn" onclick="window.open('https://discord.gg/RXkqqmT2','_blank')" title="Entrar no LabLink no Discord">
-      <span style="font-size: 1.1em;">🔬💬</span> LabLink
+    <button class="start-button">
+      <img src="retro-computer.avif" alt="Computador Retro" style="width:18px;height:18px;"> Iniciar
+    </button>
+    <button id="btn-salsaj" class="win95-btn" style="margin-left:12px;">
+      <img src="https://img.icons8.com/color/24/000000/star--v1.png" alt="Salsaj" style="vertical-align:middle;"> Fotometria 
+    </button>
+    <button id="btn-tutorial-salsaj" class="win95-btn" style="margin-left:12px;">
+      <img src="https://img.icons8.com/color/24/000000/pdf.png" alt="PDF" style="vertical-align:middle;"> Tutorial Salsaj
+    </button>
+    <button id="btn-historia" class="win95-btn" style="margin-left:12px;">
+      <img src="https://img.icons8.com/color/24/000000/book.png" alt="História" style="vertical-align:middle;"> História
     </button>
     <div class="clock" id="clock"></div>
-    <button id="ghost-toggle" class="ghost-toggle-btn" title="tenho medo de tecnologia" aria-pressed="false" style="margin-left: 0; margin-right: 12px; background: transparent; border: none; cursor: pointer; outline: none;">
-      <span style="font-size: 1.3em;">👻</span>
-    </button>
-    <button id="phone-toggle" class="phone-toggle-btn" title="Contatos rápidos" aria-pressed="false" style="margin-left: 0; margin-right: 8px; background: transparent; border: none; cursor: pointer; outline: none;">
-      <span style="font-size: 1.3em;">📞</span>
-    </button>
   </div>
   <img src="Tales_de_Mileto-removebg-preview.png" alt="Tales de Mileto" class="bg-watermark" />
   <script src="script95.js"></script>
+
+  <!-- Janela Tutorial Salsaj -->
+  <div class="window movable" id="tutorial-salsaj-window" style="margin-top: 120px; left: 180px; top: 120px; position: absolute; display: none; max-width: 680px; min-width: 340px;">
+    <div class="title-bar" id="tutorial-salsaj-title-bar">
+      <div class="title-bar-text">
+        <img src="https://img.icons8.com/color/24/000000/pdf.png" alt="PDF" style="width:18px;height:18px;vertical-align:middle;"> Tutorial Salsaj
+      </div>
+      <div class="title-bar-controls">
+        <button aria-label="Fechar" id="tutorial-salsaj-close-btn">×</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="window-body-inner" style="padding: 10px;">
+        <h3 style="color:#003366;">Tutorial SalsaJ (PDF)</h3>
+        <iframe src="SalsaJ.pdf" style="width:100%;height:420px;border:2px inset #b0c4de;background:#fff;border-radius:8px;" title="Tutorial SalsaJ"></iframe>
+        <div style="margin-top:12px;font-size:13px;color:#003366;">
+          <a href="SalsaJ.pdf" download style="color:#1565c0;font-weight:bold;text-decoration:none;">
+            <img src="https://img.icons8.com/color/24/000000/pdf.png" alt="PDF" style="vertical-align:middle;margin-right:6px;">
+            Baixar Tutorial SalsaJ.pdf
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Janela História -->
+  <div class="window movable" id="historia-window" style="margin-top: 140px; left: 220px; top: 140px; position: absolute; display: none; max-width: 520px; min-width: 320px;">
+    <div class="title-bar" id="historia-title-bar">
+      <div class="title-bar-text">
+        <img src="https://img.icons8.com/color/24/000000/book.png" alt="História" style="width:18px;height:18px;vertical-align:middle;"> História
+      </div>
+      <div class="title-bar-controls">
+        <button aria-label="Fechar" id="historia-close-btn">×</button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="window-body-inner" style="padding: 10px; text-align:center;">
+        <img src="historia.png" alt="História" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 2px 8px #0002;">
+        <div style="margin-top:18px;">
+          <button id="btn-audio-historia" class="win95-btn" style="font-weight:bold;">
+            <img src="https://img.icons8.com/color/24/000000/speaker.png" style="vertical-align:middle;"> Ligar 
+          </button>
+          <audio id="audio-historia" src="audio.wav"></audio>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // Botão da barra de tarefas para abrir o Tutorial Salsaj
+  document.getElementById('btn-tutorial-salsaj').onclick = function() {
+    const win = document.getElementById('tutorial-salsaj-window');
+    win.style.display = 'block';
+    win.style.zIndex = 4000 + Math.floor(Math.random()*1000);
+  };
+
+  // Fechar janela do Tutorial Salsaj
+  document.getElementById('tutorial-salsaj-close-btn').onclick = function() {
+    document.getElementById('tutorial-salsaj-window').style.display = 'none';
+  };
+
+  // Movimentar janela estilo Win95
+  (function() {
+    const win = document.getElementById('tutorial-salsaj-window');
+    const titleBar = document.getElementById('tutorial-salsaj-title-bar');
+    let isDragging = false, offsetX = 0, offsetY = 0;
+    titleBar.addEventListener('mousedown', function(e) {
+      if (e.button !== 0) return;
+      isDragging = true;
+      const rect = win.getBoundingClientRect();
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+      document.body.style.userSelect = 'none';
+      function dragMove(ev) {
+        if (!isDragging) return;
+        win.style.left = (ev.clientX - offsetX + window.scrollX) + 'px';
+        win.style.top = (ev.clientY - offsetY + window.scrollY) + 'px';
+      }
+      function dragUp() {
+        isDragging = false;
+        document.body.style.userSelect = '';
+        document.removeEventListener('mousemove', dragMove);
+        document.removeEventListener('mouseup', dragUp);
+      }
+      document.addEventListener('mousemove', dragMove);
+      document.addEventListener('mouseup', dragUp);
+    });
+  })();
+
+  // Botão da barra de tarefas para abrir a janela História
+  document.getElementById('btn-historia').onclick = function() {
+    const win = document.getElementById('historia-window');
+    win.style.display = 'block';
+    win.style.zIndex = 4000 + Math.floor(Math.random()*1000);
+  };
+
+  // Fechar janela História
+  document.getElementById('historia-close-btn').onclick = function() {
+    document.getElementById('historia-window').style.display = 'none';
+  };
+
+  // Movimentar janela estilo Win95 para História
+  (function() {
+    const win = document.getElementById('historia-window');
+    const titleBar = document.getElementById('historia-title-bar');
+    let isDragging = false, offsetX = 0, offsetY = 0;
+    titleBar.addEventListener('mousedown', function(e) {
+      if (e.button !== 0) return;
+      isDragging = true;
+      const rect = win.getBoundingClientRect();
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+      document.body.style.userSelect = 'none';
+      function dragMove(ev) {
+        if (!isDragging) return;
+        win.style.left = (ev.clientX - offsetX + window.scrollX) + 'px';
+        win.style.top = (ev.clientY - offsetY + window.scrollY) + 'px';
+      }
+      function dragUp() {
+        isDragging = false;
+        document.body.style.userSelect = '';
+        document.removeEventListener('mousemove', dragMove);
+        document.removeEventListener('mouseup', dragUp);
+      }
+      document.addEventListener('mousemove', dragMove);
+      document.addEventListener('mouseup', dragUp);
+    });
+  })();
+
+  // Botão para tocar o áudio
+  document.getElementById('btn-audio-historia').onclick = function() {
+    const audio = document.getElementById('audio-historia');
+    audio.currentTime = 0;
+    audio.play();
+  };
+  </script>
 </body>
 </html>
